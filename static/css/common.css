@@ -1,0 +1,48 @@
+/* 여기서부터 모든 웹페이지에 공통으로 들어가는 헤더를 위한 커먼CSS 입니다. */
+.top_banner {
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.top_logo {
+    height: 50px;
+    display: block;
+}
+
+.top_banner_buttons {
+    border: 2px solid rgba(101, 56, 56, 1);
+    color: rgba(101, 56, 56, 1);
+    font-weight: bold;
+    border-radius: 5px;
+    width: 100px;
+    height: 30px;
+}
+
+.login_box {
+    margin-right: 20px;
+}
+
+.login_box>a {
+    margin-right: 6px;
+    padding: 3px 7px;
+    cursor: pointer;
+    text-decoration: none;
+    /* 텍스트에 지혼자 이상하게 밑줄 생길때. */
+}
+
+.login_box>a:hover {
+    border: 2px solid rgb(217, 19, 19);
+    color: rgb(217, 19, 19);
+    font-weight: bold;
+    border-radius: 5px;
+    width: 100px;
+    height: 30px;
+}
+
+.login_box>a:last-child {
+    margin-right: 0;
+}
+
+/* 여기까지 모든 웹페이지에 공통으로 들어가는 헤더를 위한 커먼CSS 입니다. */
