@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../static/css/common.css"><!-- 헤더의 CSS 받는 코드 -->
+    <link rel="stylesheet" type="text/css" href="../static/css/deleteuser.css"><!-- 헤더의 CSS 받는 코드 -->
     <title>아몰약 회원정보 삭제</title>
 </head>
 
@@ -19,7 +20,7 @@
             </a>
         </h1>
         <div class="login_box">
-            <a href="" type="button" class="top_banner_buttons">상품 등록(판매자)</a>
+            <a href="product-create.html" type="button" class="top_banner_buttons">상품 등록(판매자)</a>
             <a href="carts.html" type="button" class="top_banner_buttons">장바구니</a>
             <a href="signin.html" type="button" class="top_banner_buttons">로그인</a>
             <a href="" type="button" class="top_banner_buttons">로그아웃</a>
@@ -29,7 +30,15 @@
         </div>
     </header>
     <!-- 헤더끝 -->
-    회원정보삭제 화면입니다
+    <div class="column_organizer">
+        <p class="title_delete">회원탈퇴</p>
+        <div class="info_delete">
+            <span>정말로 회원을 탈퇴하시겠습니까?</span>
+            <span>아래 탈퇴하기 버튼을 눌러주세요.</span>
+            <span>탈퇴 즉시 회원정보가 삭제됩니다.</span>
+        </div>
+        <input class="delete_button" type="button" value="탈퇴하기">
+    </div>
 </body>
 
 </html>
