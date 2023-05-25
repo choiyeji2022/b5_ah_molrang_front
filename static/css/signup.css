@@ -1,4 +1,6 @@
-/* 탑배너와 그 안에 들어있는 로고, 로그인, 로그아웃, 회원가입 */
+/* 탑배너 COMMONS.CSS로 불려오고 (내용물: 로고, 판매자상품등록버튼, 장바구니, 로그인, 로그아웃, 회원가입, 회원수정, 회원탈퇴) */
+
+/* 탑배너 아래 모든 물체를 중앙 위치로 맞춰줌 */
 .center_organizer {
     display: flex;
     flex-direction: column;
@@ -6,13 +8,12 @@
     margin-top: 50px;
 }
 
-
+/* 좌측 회원가입SIGNUP 표시와 우측 기입란 박스를 가로로 정렬 */
 .bothside_seperater {
     display: flex;
-    flex-direction: row;
 }
 
-/* 좌측 타이틀과 소셜로그인 묶음 */
+/* 좌측 타이틀과 소셜로그인 버튼 묶음 */
 .left_box {
     display: flex;
     flex-direction: column;
@@ -91,7 +92,7 @@
     height: 30px;
 }
 
-.final_button {
+.signup_button {
     margin-top: 20px;
     margin-left: 100px;
     border: 0px;
@@ -103,6 +104,6 @@
     font-weight: bold;
 }
 
-.final_button:hover {
+.signup_button:hover {
     background-color: rgba(210, 84, 43, 0.86);
 }
