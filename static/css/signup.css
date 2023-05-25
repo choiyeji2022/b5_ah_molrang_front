@@ -1,0 +1,108 @@
+/* 탑배너와 그 안에 들어있는 로고, 로그인, 로그아웃, 회원가입 */
+.center_organizer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+}
+
+
+.bothside_seperater {
+    display: flex;
+    flex-direction: row;
+}
+
+/* 좌측 타이틀과 소셜로그인 묶음 */
+.left_box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 100px 130px 0 0;
+}
+
+.title_signup {
+    color: rgba(101, 56, 56, 1);
+    font-weight: bold;
+    font-size: 70px;
+}
+
+.intro_login {
+    font-weight: bold;
+    margin-top: 100px;
+}
+
+.social_buttons {
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+}
+
+.social_buttons>button {
+    margin-right: 10px;
+    border: 0px;
+    border-radius: 5px;
+    width: 150px;
+    height: 50px;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.social_buttons>button:first-child {
+    background-color: rgba(255, 224, 46, 0.964);
+    border: 10px solid rgba(246, 208, 18, 0.895);
+}
+
+
+.social_buttons>button:first-child:hover {
+    background-color: rgb(255, 245, 46);
+}
+
+.social_buttons>button:last-child {
+    border: 10px solid black;
+    border-top-color: rgba(11, 87, 239, 0.899);
+    border-right-color: rgb(242, 242, 11);
+    border-bottom-color: rgb(188, 22, 22);
+    border-left-color: rgb(32, 114, 32);
+}
+
+.social_buttons>button:last-child:hover {
+    background-color: rgb(72, 205, 103);
+}
+
+/* 우측기입박스 */
+.right_box {
+    background-color: rgb(255, 225, 220);
+    width: 400px;
+    height: 600px;
+    border-radius: 5px;
+    box-shadow: 5px 5px gray;
+}
+
+.right_box>p {
+    font-weight: bold;
+    margin-top: 35px;
+    margin-left: 35px;
+}
+
+.right_box>input {
+    margin-left: 35px;
+    width: 300px;
+    height: 30px;
+}
+
+.final_button {
+    margin-top: 20px;
+    margin-left: 100px;
+    border: 0px;
+    border-radius: 5px;
+    width: 170px;
+    height: 40px;
+    background-color: rgba(101, 56, 56, 1);
+    color: white;
+    font-weight: bold;
+}
+
+.final_button:hover {
+    background-color: rgba(210, 84, 43, 0.86);
+}
