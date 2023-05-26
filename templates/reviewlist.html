@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <link rel="stylesheet" type="text/css" href="../static/css/common.css"><!-- 헤더의 CSS 받는 코드 -->
+    <link rel="stylesheet" href="../static/css/reviewlist.css">
+    <title>아몰약! 리뷰 목록</title>
+</head>
+
+<body>
+    <!-- 헤더시작 -->
+    <header class="top_banner" name="top_banner">
+        <h1>
+            <a href="../index.html"><img
+                    src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FH1wxl%2FbtshhJaNxYe%2FTHUZOmkP459ZULv0CuV0ok%2Fimg.png"
+                    class="top_logo">
+            </a>
+        </h1>
+        <div class="login_box">
+            <a href="" type="button" class="top_banner_buttons">상품 등록(판매자)</a>
+            <a href="carts.html" type="button" class="top_banner_buttons">장바구니</a>
+            <a href="signin.html" type="button" class="top_banner_buttons">로그인</a>
+            <a href="" type="button" class="top_banner_buttons">로그아웃</a>
+            <a href="signup.html" type="button" class="top_banner_buttons">회원가입</a>
+            <a href="updateuser.html" type="button" class="top_banner_buttons">회원정보수정</a>
+            <a href="deleteuser.html" type="button" class="top_banner_buttons">회원탈퇴</a>
+        </div>
+    </header>
+    <!-- 헤더끝 -->
+    <div class="board_list_wrap">
+        <div class="review_header">
+            <div class="title">
+                <h1>Review</h1>
+            </div>
+            <div class="review_button">
+                <a href="review_create.html" class="btn">리뷰 등록</a>
+            </div>
+        </div>
+        <table class="board_list">
+            <caption>리뷰 목록</caption>
+            <thead>
+                <tr>
+                    <th class="title">제목</th>
+                    <th class="star">별점</th>
+                    <th class="author">작성자</th>
+                    <th class="time">작성날짜</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="tit">
+                        <a href="#">비타민 좋아</a>
+                    </td>
+                    <td>★★★★★</td>
+                    <td>닉네임</td>
+                    <td>2023-11-20</td>
+                </tr>
+                <tr>
+                    <td class="tit">
+                        <a href="#">비타민 좋아</a>
+                    </td>
+                    <td>★★★★★</td>
+                    <td>닉네임</td>
+                    <td>2023-11-12</td>
+                </tr>
+                <tr>
+                    <td class="tit">
+                        <a href="#">비타민 좋아</a>
+                    </td>
+                    <td>★★★★★</td>
+                    <td>닉네임</td>
+                    <td>2023-11-02</td>
+                </tr>
+                <tr>
+                    <td class="tit">
+                        <a href="#">비타민 좋아</a>
+                    </td>
+                    <td>★★★★★</td>
+                    <td>닉네임</td>
+                    <td>2023-10-28</td>
+                </tr>
+                <tr>
+                    <td class="tit">
+                        <a href="#">비타민 좋아</a>
+                    </td>
+                    <td>★★★★★</td>
+                    <td>닉네임</td>
+                    <td>2023-10-24</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="paging">
+            <a href="#" class="bt">이전 페이지</a>
+            <a href="#" class="num on">1</a>
+            <a href="#" class="num">2</a>
+            <a href="#" class="num">3</a>
+            <a href="#" class="bt">다음 페이지</a>
+        </div>
+    </div>
+    <script src="../static/js/reviewlist.js"></script>
+</body>
+
+</html>
