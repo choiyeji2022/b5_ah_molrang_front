@@ -30,4 +30,13 @@ window.onload = async function () {
     // 삭제버튼
     const deleteButton = document.getElementById("delete-btn")
     deleteButton.setAttribute("onclick", `deleteProduct(${productId})`)
+
+    const payload = localStorage.getItem("payload");
+    const payload_parse = JSON.parse(payload)
+
+    // 어드민만 수정, 삭제 버튼 보이게 설정
+    if (!payload || payload_parse.is_admin !== true) {
+        updateButton.style.display = "none";
+        deleteButton.style.display = "none";
+    }
 }
