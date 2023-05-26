@@ -1,71 +1,162 @@
-// 상품 삭제
-var removeButtons = document.querySelectorAll('.remove');
-removeButtons.forEach(function (button) {
-    button.addEventListener('click', function () {
-        var productId = this.dataset.productId;
-        // 백엔드 API에 DELETE 요청 보내기
-        axios.delete(`/api/cart-items/${productId}/`)
-            .then(function (response) {
-                // 삭제 성공한 경우 처리 로직
-                var product = button.closest('.product');
-                product.remove();
-                calculateTotal();
-            })
-            .catch(function (error) {
-                // 삭제 실패한 경우 처리 로직
-                console.error(error);
+// API 호출을 위한 기본 URL 설정
+const baseURL = 'http://127.0.0.1:8000/';
+
+// 토큰을 로컬 스토리지에서 가져옵니다.
+const token = localStorage.getItem('token');
+
+// Axios 인스턴스 생성
+const api = axios.create({
+    baseURL: baseURL,
+    headers: {
+        'Authorization': `Bearer ${token}`
+    }
+});
+
+// 총 합계를 저장할 변수
+let totalAmount = 0;
+
+// 총합계를 계산하는 함수
+function calculateTotalAmount() {
+    const quantityElements = document.querySelectorAll('.qt');
+    console.log(quantityElements)
+    const priceElements = document.querySelectorAll('.price');
+    console.log(priceElements)
+    let total = 0;
+
+    for (let i = 0; i < quantityElements.length; i++) {
+        const quantity = parseInt(quantityElements[i].textContent.trim(), 10);
+        const priceText = priceElements[i].textContent.trim();
+        const price = parseInt(priceText.replace(/[^0-9]/g, ''), 10);
+        total += quantity * price;
+    }
+    // 페이지에 총합계를 업데이트합니다.
+    const totalAmountElement = document.getElementById('total-price');
+    totalAmountElement.textContent = `총합계: ${total}원`;
+
+    // 전역 변수 totalAmount를 업데이트합니다.
+    totalAmount = total;
+}
+
+// 장바구니 목록을 가져와서 화면에 표시하는 함수
+async function getCartItems() {
+    try {
+        // 장바구니 목록 API 호출
+        const response = await api.get('carts/');
+        const cartItems = response.data;
+
+        // 장바구니 목록을 화면에 표시
+        const cartContainer = document.querySelector('.cart-items');
+        cartContainer.innerHTML = ''; // 기존 내용 초기화
+
+        cartItems.forEach(cartItem => {
+            const cartItemElement = document.createElement('div');
+            cartItemElement.classList.add('cart-item');
+
+            // 장바구니 아이템의 정보를 표시
+            const imageSrc = `${window.location.origin}${cartItem.image}`;
+
+            cartItemElement.innerHTML = `
+        <div class="product-info">
+          <img class="product-image" src="${imageSrc}" alt="${cartItem.product.product}" width="200">
+          <div class="product-details">
+            <h3>${cartItem.product.product}</h3>
+            <p>${cartItem.product.content}</p>
+            <p class="price">${cartItem.product.price}원</p>
+            <p>${cartItem.product.inventory_status}</p>
+            <p>작성자: ${cartItem.product.writer}</p>
+          </div>
+        </div>
+
+        <div class="quantity">
+          <span class="qt-minus">-</span>
+          <span class="qt">${cartItem.quantity}</span>
+          <span class="qt-plus">+</span>
+        </div>
+
+        <div class="checkbox">
+          <input type="checkbox" class="item-checkbox">
+        </div>
+
+        <div class="remove">
+          <button class="remove-btn">제거</button>
+        </div>
+
+        <div id="total-price"></div>
+
+      `;
+
+            cartContainer.appendChild(cartItemElement);
+
+            // 수량 조절 이벤트 처리
+            const quantityContainer = cartItemElement.querySelector('.quantity');
+            const quantityMinusBtn = quantityContainer.querySelector('.qt-minus');
+            const quantityPlusBtn = quantityContainer.querySelector('.qt-plus');
+            const quantityText = quantityContainer.querySelector('.qt');
+
+            quantityMinusBtn.addEventListener('click', () => {
+                if (cartItem.quantity > 1) {
+                    cartItem.quantity--;
+                    quantityText.textContent = cartItem.quantity;
+                    calculateTotalAmount();
+                }
             });
-    });
-});
 
-// 수량 조절
-var minusButtons = document.querySelectorAll('.qt-minus');
-var plusButtons = document.querySelectorAll('.qt-plus');
-var quantityElements = document.querySelectorAll('.qt');
-var priceElements = document.querySelectorAll('.full-price');
-var initialPrices = Array.from(priceElements, function (element) {
-    return parseInt(element.textContent.replace(',', '').replace('원', '').trim());
-});
-var totalAmountElement = document.getElementById('totalAmount');
+            quantityPlusBtn.addEventListener('click', () => {
+                cartItem.quantity++;
+                quantityText.textContent = cartItem.quantity;
+                calculateTotalAmount();
+            });
 
-for (var i = 0; i < minusButtons.length; i++) {
-    (function (index) {
-        minusButtons[index].addEventListener('click', function () {
-            var quantity = parseInt(quantityElements[index].textContent);
-            if (quantity > 1) {
-                quantityElements[index].textContent = quantity - 1;
-                updatePrice(index);
-                calculateTotal();
-            }
+            // 상품 제거 이벤트 처리
+            const removeBtn = cartItemElement.querySelector('.remove-btn');
+            removeBtn.addEventListener('click', () => {
+                const cartItemId = cartItem.id;
+                removeCartItem(cartItemId);
+            });
         });
 
-        plusButtons[index].addEventListener('click', function () {
-            var quantity = parseInt(quantityElements[index].textContent);
-            quantityElements[index].textContent = quantity + 1;
-            updatePrice(index);
-            calculateTotal();
-        });
-    })(i);
+        // 총합계 요청 및 표시 함수 호출
+        displayTotalPrice();
+    } catch (error) {
+        console.error('장바구니 목록을 가져오는데 실패했습니다:', error);
+    }
 }
 
-// 가격 업데이트
-function updatePrice(index) {
-    var quantity = parseInt(quantityElements[index].textContent);
-    var price = initialPrices[index];
-    var fullPrice = quantity * price;
-    priceElements[index].textContent = fullPrice.toLocaleString() + '원';
+// 총합계를 요청하여 표시하는 함수
+async function displayTotalPrice() {
+    try {
+        // 총합계 API 호출
+        const response = await api.get('carts/total-price/');
+        const total = response.data.total_price;
+        console.log(response.data); // API 응답 확인
+        // 총합계를 HTML 요소에 표시
+        document.getElementById('total-price').textContent = `총합계: ${total}원`;
+    } catch (error) {
+        console.error('총합계를 가져오는데 실패했습니다:', error);
+    }
 }
 
-// 총 합계 계산
-function calculateTotal() {
-    var priceElements = document.querySelectorAll('.full-price');
-    var total = 0;
-    priceElements.forEach(function (element) {
-        var price = parseInt(element.textContent.replace(',', '').replace('원', '').trim());
-        total += price;
-    });
-    totalAmountElement.textContent = total.toLocaleString() + '원';
+
+// 상품 제거 함수
+async function removeCartItem(cartItemId) {
+    try {
+        // 장바구니 상품 제거 API 호출
+        await api.delete(`carts/items/${cartItemId}`);
+
+        // 장바구니 목록 갱신
+        getCartItems();
+    } catch (error) {
+        console.error('장바구니 상품을 제거하는데 실패했습니다:', error);
+    }
 }
 
-// 초기 총 합계 계산
-calculateTotal();
+// 로그아웃 버튼 클릭 시 실행되는 함수
+document.getElementById('logout-btn').addEventListener('click', function () {
+    // 토큰 삭제
+    localStorage.removeItem('token');
+    // 리디렉션
+    window.location.href = 'index.html';
+});
+
+// 페이지 로드 시 장바구니 목록을 가져옵니다.
+window.addEventListener('load', getCartItems);
