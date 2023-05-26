@@ -1,3 +1,6 @@
+const backend_base_url = "http://127.0.0.1:8000";
+const frontend_base_url = "http://127.0.0.1:5500";
+
 async function injectNavbar() {
     fetch("../navbar.html").then(response => {
         return response.text()
@@ -56,32 +59,32 @@ async function injectNavbar() {
     }
 }
 
-console.log("로딩되었습니다.")
+// console.log("로딩되었습니다.")
 
-function lalala() {
-    const payload = localStorage.getItem("payload")
-    const payload_parse = JSON.parse(payload)
-    console.log(payload_parse.username)
+// function lalala() {
+//     const payload = localStorage.getItem("payload")
+//     const payload_parse = JSON.parse(payload)
+//     console.log(payload_parse.username)
 
-    const intro = document.getElementById("intro")
+//     const intro = document.getElementById("intro")
 
-    intro.innerText = `${payload_parse.username} 님 안녕하세요!`
+//     intro.innerText = `${payload_parse.username} 님 안녕하세요!`
 
 
-    let navbarRight = document.getElementById("nav-right")
-    let newLi = document.createElement("li")
-    newLi.setAttribute("class", 'nav-link active')
+//     let navbarRight = document.getElementById("nav-right")
+//     let newLi = document.createElement("li")
+//     newLi.setAttribute("class", 'nav-link active')
 
-    newLi.innerText = "로그아웃"
-    newLi.setAttribute("onClick", "handleLogout()")
+//     newLi.innerText = "로그아웃"
+//     newLi.setAttribute("onClick", "handleLogout()")
 
-    console.log("navbarRight=", navbarRight)
+//     console.log("navbarRight=", navbarRight)
 
-    navbarRight.appendChild(newLi)
+//     navbarRight.appendChild(newLi)
 
-    let loginButton = document.getElementById("login-button")
-    loginButton.style.display = "none"
-}
+//     let loginButton = document.getElementById("login-button")
+//     loginButton.style.display = "none"
+// }
 
 
 
@@ -105,10 +108,11 @@ function checkLogin() {
 
 
 
-async function loadScreen() {
-    await injectNavbar()
+// async function loadScreen() {
+//     await injectNavbar()
 
-    lalala()
+//     lalala()
 
-}
-loadScreen()
+// }
+// loadScreen()
+injectNavbar()
