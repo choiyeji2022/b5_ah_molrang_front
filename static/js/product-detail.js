@@ -1,8 +1,9 @@
 console.log("디테일연결")
 
+
 window.onload = async function () {
     const urlParmas = new URLSearchParams(window.location.search);
-    const productId = urlParmas.get('id_product');
+    productId = urlParmas.get('id_product');
 
     const response = await getProduct(productId);
 
@@ -18,17 +19,15 @@ window.onload = async function () {
 
     productImage.appendChild(newImage)
     productName.innerText = response.product
-    productPrice.innerText = response.price
+    productPrice.innerText = `₩${response.price}`
     productQuantity.innerText = response.inventory_status
     productContent.innerText = response.content
 
-    // // 게시글 수정 버튼 생성해서 추가
-    // const buttonContainer = document.getElementById("update-delete-button-container");
-    // const updateButton = createUpdateButton(productId);
-    // buttonContainer.appendChild(updateButton);
+    // 수정버튼
+    const updateButton = document.getElementById("update-btn")
+    updateButton.setAttribute("onclick", `product_update_page(${productId})`)
 
-    // // 게시글 삭제 버튼 생성해서 추가
-    // const deleteButton = createDeleteButton(productId);
-    // buttonContainer.appendChild(deleteButton);
-
+    // 삭제버튼
+    const deleteButton = document.getElementById("delete-btn")
+    deleteButton.setAttribute("onclick", `deleteProduct(${productId})`)
 }

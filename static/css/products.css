@@ -1,29 +1,11 @@
-/* .btn-custom {
-    background-color: #934747 !important;
-    border-color: #934747 !important;
-    color: #fff !important;
-}
-
-.btn-custom:hover {
-    background-color: #af7e7e !important;
-    border-color: #af7e7e !important;
-    color: #ffffff !important;
-} */
-
 .card {
     border: 4px double #934747 !important;
 }
-
 
 .title {
     font-size: 4rem;
     color: #934747;
 }
-
-/* img {
-    width: 100% !important;
-    height: 230px !important;
-} */
 
 .card-img-top {
     width: auto !important;

@@ -1,37 +1,6 @@
 const backend_base_url = "http://127.0.0.1:8000";
 const front_base_url = "http://127.0.0.1:5500";
 
-// 사용자의 권한 확인 함수
-function checkUserPermission() {
-    const isAdmin = localStorage.getItem("is_admin");
-
-    // 권한이 없는 경우 처리
-    if (isAdmin !== "true") {
-        // 다른 페이지로 리디렉션 또는 접근 거부 메시지 표시
-        alert("접근할 수 없는 페이지입니다.");
-        window.location.href = `${front_base_url}/index.html`; // 리디렉션할 URL
-    }
-}
-
-
-// 페이지 로드 시 사용자 권한 확인 수행
-window.onload = function () {
-    checkUserPermission();
-    localProducts();
-};
-
-
-function checkSigninPost() {
-    const payload = localStorage.getItem("payload");
-    const isAdmin = localStorage.getItem("is_admin");
-    const postButton = document.getElementById("post-btn");
-
-    if (!payload || isAdmin !== "true") {
-        postButton.style.display = "none";
-    }
-}
-
-
 
 // 게시글 불러오기
 async function getProducts() {
@@ -63,13 +32,11 @@ async function postProduct() {
     formdata.append("image", image)
     formdata.append("content", content)
 
-    let token = localStorage.getItem("access")
-    console.log("액세스", token)
+    let token = localStorage.getItem("token")
     const response = await fetch(`${backend_base_url}/products/`, {
         method: "POST",
         headers: {
-            // 임시로 토큰 박아놨습니다! 나중에 수정 예정!
-            "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjg2MjAxNTAyLCJpYXQiOjE2ODQ5OTE5MDIsImp0aSI6ImVlYWMxNzdjMDIyYzRiY2Q5NDIyNGE1M2U1MzU1ZThlIiwidXNlcl9pZCI6MSwidXNlcm5hbWUiOiJhZG1pbiJ9.jXuqHN55OGKbiN0UeMNXJPphjO6_dthMiGk5gn822RA"
+            "Authorization": `Bearer ${token}`
         },
         body: formdata
     }
@@ -104,40 +71,68 @@ async function getProduct(productId) {
     }
 }
 
-// 게시글 수정
-async function updateProduct(productId, updatedData) {
-    const response = await fetch(`${backend_base_url}/products/${productId}/`, {
-        method: "PUT",
-        headers: {
-            // 임시로 토큰 박아놨습니다! 나중에 수정 예정!
-            "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjg2MjAxNTAyLCJpYXQiOjE2ODQ5OTE5MDIsImp0aSI6ImVlYWMxNzdjMDIyYzRiY2Q5NDIyNGE1M2U1MzU1ZThlIiwidXNlcl9pZCI6MSwidXNlcm5hbWUiOiJhZG1pbiJ9.jXuqHN55OGKbiN0UeMNXJPphjO6_dthMiGk5gn822RA"
-        },
-        body: JSON.stringify(updatedData)
-    });
 
+// 수정 페이지로 가기
+function product_update_page(productId) {
+    window.location.href = `${front_base_url}/templates/product-update.html?id_product=${productId}`;
+}
+
+
+// 수정하기
+async function product_update(productId) {
+    const product = document.querySelector(".product").value
+    const price = document.querySelector(".price").value
+    const total_quantity = document.querySelector(".total_quantity").value
+    const image = document.querySelector(".image").files[0]
+    const content = document.querySelector(".content").value
+
+    const formdata = new FormData();
+    formdata.append("product", product)
+    formdata.append("price", price)
+    formdata.append("total_quantity", total_quantity)
+    formdata.append("image", image)
+    formdata.append("content", content)
+
+    let token = localStorage.getItem("token")
+
+    const response = await fetch(`${backend_base_url}/products/${productId}/`, {
+        method: 'PUT',
+        headers: {
+            'Authorization': `Bearer ${token}`
+        },
+        body: formdata
+    })
+    const response_json = await response.json()
     if (response.status == 200) {
-        alert("게시글이 수정되었습니다.");
-        // 수정된 게시글의 상세 페이지로 이동하거나 필요한 처리 수행
+        window.location.replace(`${front_base_url}/templates/product-detail.html?id_product=${productId}`)
     } else {
-        alert("게시글 수정에 실패했습니다.");
+        alert(response_json)
     }
 }
 
-// 게시글 삭제
-async function deleteProduct(productId) {
-    console.log(productId)
-    const response = await fetch(`${backend_base_url}/products/${productId}/`, {
-        method: "DELETE",
-        headers: {
-            // 임시로 토큰 박아놨습니다! 나중에 수정 예정!
-            "Authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjg2MjIyOTYxLCJpYXQiOjE2ODUwMTMzNjEsImp0aSI6IjlkMmU5MTUyNTczZTQ5OTFhYmE4NTEwNTExNmQ4Njk1IiwidXNlcl9pZCI6MSwidXNlcm5hbWUiOiJhZG1pbiJ9.h57LG2J7FGwa4f5R10HgBpxHTU-3B1gZCZdtz5W-EAg"
-        },
-    });
 
-    if (response.status == 204) {
-        alert("게시글이 삭제되었습니다.");
-        // 게시글 목록 페이지로 이동하거나 필요한 처리 수행
+// 삭제
+async function deleteProduct(productId) {
+    let token = localStorage.getItem("token")
+
+    // confirm 메소드를 사용하여 확인 체크창을 띄움
+    const confirmed = confirm("정말 삭제하시겠습니까?");
+    if (!confirmed) {
+        return;
+    }
+
+    const response = await fetch(`${backend_base_url}/products/${productId}/`, {
+        method: 'DELETE',
+        headers: {
+            'Authorization': `Bearer ${token}`
+        },
+    })
+
+    if (response.ok) {
+        alert("삭제되었습니다!");
+        window.location.replace(`${front_base_url}/index.html`);
     } else {
-        alert("게시글 삭제에 실패했습니다.");
+        const response_json = await response.json();
+        alert(`오류가 발생했습니다: ${response_json}`);
     }
 }
