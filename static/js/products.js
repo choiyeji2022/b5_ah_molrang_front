@@ -5,9 +5,6 @@ function productDetail(id_product) {
 }
 
 
-
-
-
 window.onload = async function localProducts() {
     products = await getProducts()
     console.log(products)
@@ -54,7 +51,7 @@ window.onload = async function localProducts() {
 
             const price = document.createElement("p");
             price.setAttribute("class", "card-text");
-            price.innerText = product.price;
+            price.innerText = `₩${product.price}`;
 
             newCardBody.appendChild(productName);
             newCardBody.appendChild(inventoryStatus);

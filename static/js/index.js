@@ -8,22 +8,22 @@ window.onload = () => {
     const intro = document.getElementById("intro")
 
     intro.innerText = `${payload_parse.username} 님 안녕하세요!`
-    
-    
+
+
     let navbarRight = document.getElementById("nav-right")
     let newLi = document.createElement("li")
     newLi.setAttribute("class", 'nav-link active')
 
     newLi.innerText = "로그아웃"
-    newLi.setAttribute("onClick","handleLogout()")
+    newLi.setAttribute("onClick", "handleLogout()")
 
-    
+    console.log("navbarRight=", navbarRight)
 
     navbarRight.appendChild(newLi)
 
     let loginButton = document.getElementById("login-button")
     loginButton.style.display = "none"
-    
+
 }
 
 function handleLogout() {
@@ -35,9 +35,9 @@ function handleLogout() {
     console.log(response)
 }
 
-function checkLogin(){
+function checkLogin() {
     const payload = localStorage.getItem("payload")
-    if(payload){
+    if (payload) {
         window.location.replace(`${frontend_base_url}/index.html`)
     }
 }
