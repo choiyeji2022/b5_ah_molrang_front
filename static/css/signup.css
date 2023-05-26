@@ -80,20 +80,20 @@
     box-shadow: 5px 5px gray;
 }
 
-.right_box>p {
+.right_box>form>p {
     font-weight: bold;
     margin-top: 35px;
     margin-left: 35px;
 }
 
-.right_box>input {
+.right_box>form>input {
     margin-left: 35px;
     width: 300px;
     height: 30px;
 }
 
 .signup_button {
-    margin-top: 20px;
+    margin-top: 60px;
     margin-left: 100px;
     border: 0px;
     border-radius: 5px;

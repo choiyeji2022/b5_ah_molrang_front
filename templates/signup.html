@@ -22,7 +22,7 @@
         <div class="login_box">
             <a href="" type="button" class="top_banner_buttons">상품 등록(판매자)</a>
             <a href="carts.html" type="button" class="top_banner_buttons">장바구니</a>
-            <a href="signin.html" type="button" class="top_banner_buttons">로그인</a>
+            <a href="signin.html" type="button" class="top_banner_buttons" id="login_button">로그인</a>
             <a href="" type="button" class="top_banner_buttons">로그아웃</a>
             <a href="signup.html" type="button" class="top_banner_buttons">회원가입</a>
             <a href="updateuser.html" type="button" class="top_banner_buttons">회원정보수정</a>
@@ -36,25 +36,26 @@
                 <div class="title_signup" name="title_signup">회원가입<br>SIGN UP</div>
                 <p class="intro_login">이도 저도 귀찮으면</p>
                 <div class="social_buttons">
-                    <button>카카오톡 로그인</button>
+                    <button onclick="kakaoLogin()">카카오 로그인</button>
                     <button>구글 로그인</button>
                 </div>
             </div>
             <div class="right_box">
-                <p>아이디를 입력하세요</p>
-                <input />
-                <p>비밀번호를 입력하세요</p>
-                <input />
-                <p>비밀번호 재확인</p>
-                <input />
-                <p>이메일을 입력하세요</p>
-                <input />
-                <p></p>
-                <button class="signup_button">작성완료</button>
+                <form>
+                    <p>아이디를 입력하세요</p>
+                    <input id="user_create_id">
+                    <p>비밀번호를 입력하세요</p>
+                    <input id="user_create_password">
+                    <p>비밀번호 재확인</p>
+                    <input id="user_create_password_check">
+                    <p>이메일을 입력하세요</p>
+                    <input id="user_create_email">
+                    <button onclick="signup_button()" class="signup_button" type='button'>작성완료</button>
+                </form>
             </div>
         </div>
     </div>
-    <script src="signup.js"></script>
+    <script src="../static/js/signup.js"></script>
 </body>
 
 </html>
