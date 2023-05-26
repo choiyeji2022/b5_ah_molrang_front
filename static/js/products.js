@@ -65,6 +65,8 @@ window.onload = async function localProducts() {
             newCardBody.appendChild(newCardTitle)
 
             product_list.appendChild(newCol)
+
+
         });
     } else {
         console.log("product-list 요소를 찾을 수 없습니다.");
