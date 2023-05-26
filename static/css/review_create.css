@@ -1,0 +1,132 @@
+.wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+
+.title_input {
+    margin-bottom: 10px;
+}
+
+.review_rating {
+    width: 700px;
+    margin: 0 auto;
+    padding: 10px;
+    border-top: 3px solid #b36f6f;
+
+}
+
+.review_rating input {
+    width: 676px;
+    padding: 10px;
+    margin: 12px auto 0;
+}
+
+.review_rating textarea {
+    width: 676px;
+    padding: 10px;
+    margin: 12px auto 0;
+}
+
+.star-ratings {
+    color: #aaa9a9;
+    position: relative;
+    unicode-bidi: bidi-override;
+    width: max-content;
+    -webkit-text-fill-color: transparent;
+    /* Will override color (regardless of order) */
+    -webkit-text-stroke-width: 1.3px;
+    -webkit-text-stroke-color: #2b2a29;
+}
+
+.star-ratings-fill {
+    color: #8d4f4f;
+    padding: 0;
+    position: absolute;
+    z-index: 1;
+    display: flex;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    -webkit-text-fill-color: gold;
+}
+
+.star-ratings-base {
+    z-index: 0;
+    padding: 0;
+}
+
+.star-rating {
+    display: flex;
+    flex-direction: row-reverse;
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+    justify-content: space-around;
+    padding: 0 0.2em;
+    text-align: center;
+    width: 5em;
+}
+
+.star-rating input {
+    display: none;
+}
+
+.star-rating label {
+    -webkit-text-fill-color: transparent;
+    /* Will override color (regardless of order) */
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: #000000;
+    cursor: pointer;
+}
+
+.star-rating :checked~label {
+    -webkit-text-fill-color: #ffee00;
+}
+
+.star-rating label:hover,
+.star-rating label:hover~label {
+    -webkit-text-fill-color: #fefde6;
+}
+
+.review_button {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+}
+
+.review_button>:first-child {
+    display: inline-block;
+    margin-left: 10px;
+    padding: 7px 15px;
+    border-radius: 100px;
+    font-size: 15px;
+    border: 1px solid #b36f6f;
+    font-weight: 600;
+    color: #b36f6f;
+    background: #b36f6f;
+    color: #fff;
+}
+
+
+.review_button>:first-child:hover {
+    border: 1.5px solid #a82525;
+}
+
+.review_button>:last-child {
+
+    margin-left: 10px;
+    padding: 7px 15px;
+    border-radius: 100px;
+    font-size: 15px;
+    border: 1px solid #b36f6f;
+    font-weight: 600;
+    color: #b36f6f;
+}
+
+.review_button>:last-child:hover {
+    background: #b36f6f;
+    color: #fff;
+}
