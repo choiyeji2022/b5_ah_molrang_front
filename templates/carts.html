@@ -1,141 +1,146 @@
-<html lang="kr">
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="../static/css/carts.css">
-    <title>아몰약! - 장바구니</title>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>장바구니</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .cart-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .cart-item {
+            background-color: #f5f5f5;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        h3 {
+            margin: 0;
+            font-size: 18px;
+        }
+
+        p {
+            margin: 10px 0;
+            font-size: 14px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 
 <body>
-    <header id="site-header">
-        <div class="container">
-            <h1>AH MOLYAK <span>[</span> <em><a href="https://github.com/banghyunjae" target="_blank">계속 거래하기</a></em>
-                <span class="last-span is-open">]</span>
-            </h1>
-            <div>
-                <div id="user-info">
-                    <span id="user-id">user@user.com</span>
-                </div>
-                <div class="container">
-                    <div class="btn-logout">
-                        <span>Logout</span>
-                        <div class="dot"></div>
+    <div class="cart-container">
+        <h2>장바구니</h2>
+        <div class="cart-items">
+            <!-- 장바구니 아이템들이 여기에 동적으로 추가될 것입니다 -->
+            <meta charset="utf-8">
+            <meta http-equiv="x-ua-compatible" content="ie=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <link rel="stylesheet" href="../static/css/carts.css">
+            <title>아몰약! - 장바구니</title>
+            </head>
+
+            <body>
+                <header id="site-header">
+                    <div class="container">
+                        <h1>AH MOLYAK <span>[</span> <em><a href="https://github.com/banghyunjae" target="_blank">계속
+                                    거래하기</a></em>
+                            <span class="last-span is-open">]</span>
+                        </h1>
+                        <div>
+                            <div id="user-info">
+                                <span id="user-id">user@user.com</span>
+                            </div>
+                            <div class="container">
+                                <div class="btn-logout">
+                                    <span>Logout</span>
+                                    <div class="dot"></div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
         </div>
-    </header>
-    <div class="container">
 
-        <section id="cart">
-            <article class="product">
-                <header>
-                    <a class="remove">
-                        <img src="http://www.astudio.si/preview/blockedwp/wp-content/uploads/2012/08/1.jpg" alt="">
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script>
+            // API 호출을 위한 기본 URL 설정
+            const baseURL = 'http://127.0.0.1:8000/';
 
-                        <h3>Remove product</h3>
-                    </a>
-                </header>
+            // 토큰을 로컬 스토리지에서 가져옵니다.
+            const token = localStorage.getItem('token');
 
-                <div class="content">
+            // Axios 인스턴스 생성
+            const api = axios.create({
+                baseURL: baseURL,
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
 
-                    <h1>맥스 멀티비타민 앤 미네랄 포틴</h1>
+            // 장바구니 목록을 가져와서 화면에 표시하는 함수
+            async function getCartItems() {
+                try {
+                    // 장바구니 목록 API 호출
+                    const response = await api.get('carts/');
+                    const cartItems = response.data;
 
-                    신세계백화점은 쓱닷컴을 통해 이달 1일부터 선보이고 있는 아웃도어 역시즌 행사가 21일까지 전년 동기 대비 221.2%의 매출 신장률을 기록하고 있다고 23일 밝혔다. 이번
-                    행사에서는 K2, 네파, 코오롱스포츠 등 인기 아웃도어 브랜드의 상품을 최초 가격 대비 최대 70% 할인된 가격에 구매할 수 있다. 대표 상품으로는 K2 ‘씬에어 구스다운’를
-                    15만 원대에 살 수 있으며 네파 ‘숏 구스 다운’은 5만 원대, 코오롱스포츠 ‘안타티카 다운’은 40만 원대에 선보인다.
-                </div>
+                    // 장바구니 목록을 화면에 표시
+                    const cartContainer = document.querySelector('.cart-items');
+                    console.log(cartContainer)
+                    cartContainer.innerHTML = ''; // 기존 내용 초기화
 
-                <footer class="content">
-                    <span class="qt-minus">-</span>
-                    <span class="qt">1</span>
-                    <span class="qt-plus">+</span>
+                    cartItems.forEach(cartItem => {
+                        console.log(cartItem)
+                        const cartItemElement = document.createElement('div');
+                        cartItemElement.classList.add('cart-item');
 
-                    <h2 class="full-price">
-                        3,000원
-                    </h2>
-
-
-                </footer>
-            </article>
-
-            <article class="product">
-                <header>
-                    <a class="remove">
-                        <img src="http://www.astudio.si/preview/blockedwp/wp-content/uploads/2012/08/3.jpg" alt="">
-
-                        <h3>Remove product</h3>
-                    </a>
-                </header>
-
-                <div class="content">
-
-                    <h1>고려은단 비타민C 1000+</h1>
-
-                    고물가에 합리적인 소비를 추구하는 사람들이 많아지면서 유통가의 계절을 거스르는 마케팅은 더욱 활발해지고 있다. 특히 겨울 패딩의 경우 성수기(추울 때)에 봐 두었던 상품을
-                    비수기(따뜻한 봄과 여름)에 높은 할인율을 적용받아 살 수 있어 해마다 고객 수요도 많아지는 추세다.
-                </div>
-
-                <footer class="content">
-
-                    <span class="qt-minus">-</span>
-                    <span class="qt">1</span>
-                    <span class="qt-plus">+</span>
-
-                    <h2 class="full-price">
-                        80,000원
-                    </h2>
+                        // 장바구니 아이템의 정보를 표시
+                        const imageSrc = `${window.location.origin}${cartItem.image}`;
 
 
-                </footer>
-            </article>
-
-            <article class="product">
-                <header>
-                    <a class="remove">
-                        <img src="http://www.astudio.si/preview/blockedwp/wp-content/uploads/2012/08/5.jpg" alt="">
-
-                        <h3>Remove product</h3>
-                    </a>
-                </header>
-
-                <div class="content">
-
-                    <h1>종근당 칼슘 앤 마그네슘 비타민D 아연</h1>
-
-                    신세계백화점은 6월까지 쓱닷컴 겨울 패딩 행사를 계속 펼친다. 최문열 신세계백화점 패션담당 상무는 “여름에도 겨울 상품을 찾는 합리적인 고객들이 늘면서 예년보다 한 달 빠른 대규모
-                    역시즌 행사를 마련했다”며 “앞으로도 업계를 선도하는 차별화된 행사들을 이어갈 것”이라고 말했다.
-                </div>
-
-                <footer class="content">
-
-                    <span class="qt-minus">-</span>
-                    <span class="qt">1</span>
-                    <span class="qt-plus">+</span>
-
-                    <h2 class="full-price">
-                        130,000원
+                        cartItemElement.innerHTML = `
+                        <h3>${cartItem.product.product}</h3>
+                        <p>${cartItem.product.price}원</p>
+                        <p>${cartItem.product.inventory_status}</p>
+                        <p>${cartItem.product.content}</p>
+                        <p>작성자: ${cartItem.product.writer}</p>
+                        <img src="${imageSrc}" alt="${cartItem.product.product}" width="200">
+                    `;
 
 
-                </footer>
-            </article>
+                        cartContainer.appendChild(cartItemElement);
+                    });
+                } catch (error) {
+                    console.error('장바구니 목록을 가져오는데 실패했습니다:', error);
+                }
+            }
 
-        </section>
-
-    </div>
-
-    <footer id="site-footer">
-        <div class="container clearfix">
-            <div class="right">
-                <h1 class="total">Total: <span id="totalAmount">0</span></h1>
-                <a class="btn">결제하기</a>
-            </div>
-        </div>
-    </footer>
-    <script src="carts.js"></script>
-
+            // 페이지 로드 시 장바구니 목록을 가져옵니다.
+            window.addEventListener('load', getCartItems);
+        </script>
 </body>
 
 </html>

@@ -6,7 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../static/css/common.css"><!-- 헤더의 CSS 받는 코드 -->
-    <title>Document</title>
+    <title>아몰약!💊</title>
+    <link rel="stylesheet" href="/static/css/products.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" 
+    rel="stylesheet" 
+    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" 
+    crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" 
+    crossorigin="anonymous"></script> 
+    <script src="../static/js/products-api.js"></script>
+    <script src="../static/js/products.js"></script>
 </head>
 
 <body>
@@ -19,17 +30,21 @@
             </a>
         </h1>
         <div class="login_box">
-            <a href="" type="button" class="top_banner_buttons">상품 등록(판매자)</a>
-            <a href="carts.html" type="button" class="top_banner_buttons">장바구니</a>
-            <a href="signin.html" type="button" class="top_banner_buttons">로그인</a>
+            <a href="/templates/product-create.html" type="button" class="top_banner_buttons" id="post-btn">상품등록페이지(판매자전용)</a>
+            <a href="/templates/carts.html" type="button" class="top_banner_buttons">장바구니</a>
+            <a href="/templates/signin.html" type="button" class="top_banner_buttons">로그인</a>
             <a href="" type="button" class="top_banner_buttons">로그아웃</a>
-            <a href="signup.html" type="button" class="top_banner_buttons">회원가입</a>
-            <a href="updateuser.html" type="button" class="top_banner_buttons">회원정보수정</a>
-            <a href="deleteuser.html" type="button" class="top_banner_buttons">회원탈퇴</a>
+            <a href="/templates/signup.html" type="button" class="top_banner_buttons">회원가입</a>
+            <a href="/templates/updateuser.html" type="button" class="top_banner_buttons">회원정보수정</a>
+            <a href="/templates/deleteuser.html" type="button" class="top_banner_buttons">회원탈퇴</a>
         </div>
     </header>
     <!-- 헤더끝 -->
-    메인페이지화면입니다.
+    <h1 class="text-center mt-5 title">Product</h1>
+    <div class="container">
+        <div class="row row-cols-1 row-cols-md-4" id="product-list">
+        </div>
+    </div>
 </body>
 
 </html>
