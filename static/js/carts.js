@@ -156,13 +156,8 @@ async function removeCartItem(cartItemId) {
     }
 }
 
-// 로그아웃 버튼 클릭 시 실행되는 함수
-document.getElementById('logout-btn').addEventListener('click', function () {
-    // 토큰 삭제
-    localStorage.removeItem('token');
-    // 리디렉션
-    window.location.href = 'index.html';
-});
 
 // 페이지 로드 시 장바구니 목록을 가져옵니다.
 window.addEventListener('load', getCartItems);
+
+
