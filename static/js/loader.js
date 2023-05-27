@@ -74,14 +74,14 @@ function handleLogout() {
     localStorage.removeItem("access")
     localStorage.removeItem("refresh")
     localStorage.removeItem("payload")
-    location.replace(`${front_base_url}/index.html`)
+    location.replace(`${frontend_base_url}/index.html`)
     console.log(response)
 }
 
 function checkLogin() {
     const payload = localStorage.getItem("payload")
     if (payload) {
-        window.location.replace(`${front_base_url}/index.html`)
+        window.location.replace(`${frontend_base_url}/index.html`)
     }
 }
 

@@ -17,7 +17,7 @@ const api = axios.create({
 
 
 function productDetail(id_product) {
-    window.location.href = `${front_base_url}/templates/product-detail.html?id_product=${id_product}`
+    window.location.href = `${frontend_base_url}/templates/product-detail.html?id_product=${id_product}`
 }
 
 // 장바구니에 상품을 추가하는 함수

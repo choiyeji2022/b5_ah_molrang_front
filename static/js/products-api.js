@@ -1,5 +1,4 @@
-// const backend_base_url = "http://127.0.0.1:8000";
-// const front_base_url = "http://127.0.0.1:5500";
+
 
 
 // 게시글 불러오기
@@ -15,22 +14,44 @@ async function getProducts() {
     }
 }
 
+// function test() {
+//     const test = new FormData();
+//     test.append('1', 1);
+//     console.log(test)
+// }
+// test()
+
 // 게시글 생성
 async function postProduct() {
-    const product = document.querySelector(".product").value
-    const price = document.querySelector(".price").value
-    const total_quantity = document.querySelector(".total_quantity").value
-    const image = document.querySelector(".image").files[0]
-    const content = document.querySelector(".content").value
+    // const title = document.getElementById("title").value;
+    // const star = parseInt(document.getElementById("star").value);
+    // const content = document.getElementById("content").value;
+    // const image = document.getElementById("image");
 
+    // const formData = new FormData();
+    // formData.append("title", title,);
+    // formData.append("star", star);
+    // formData.append("content", content);
+    // formData.append("image", image.files[0]);
+    // console.log('hi')
 
-    const formdata = new FormData();
+    const product = document.getElementById("formGroupExampleInput").value
+    const price = parseInt(document.getElementById("price_1").value)
+    const total_quantity = document.getElementById("total").value
+    const image = document.getElementById("formFile")
+    const content = document.getElementById("exampleFormControlTextarea1").value
+    console.log(typeof (price))
 
-    formdata.append("product", product)
-    formdata.append("price", price)
-    formdata.append("total_quantity", total_quantity)
-    formdata.append("image", image)
-    formdata.append("content", content)
+    const formData = new FormData();
+    formData.append("price", parseInt(price));
+    formData.append("product", product);
+    formData.append("total_quantity", total_quantity);
+    formData.append("image", image.files[0]);
+    formData.append("content", content);
+
+    for (var key of formData.entries()) {
+        console.log(key[0] + ', ' + key[1]);
+    }
 
     let token = localStorage.getItem("token")
     const response = await fetch(`${backend_base_url}/products/`, {
@@ -38,13 +59,13 @@ async function postProduct() {
         headers: {
             "Authorization": `Bearer ${token}`
         },
-        body: formdata
+        body: formData
     }
     )
 
     if (response.status == 201) {
         alert("글작성 완료")
-        window.location.replace(`${front_base_url}/index.html`);
+        window.location.replace(`${frontend_base_url}/index.html`);
     } else {
         alert(response.status)
     }
@@ -53,7 +74,7 @@ async function postProduct() {
 
 // 작성 취소
 function cancel() {
-    window.location.href = `${front_base_url}/index.html`;
+    window.location.href = `${frontend_base_url}/index.html`;
 }
 
 
@@ -64,7 +85,9 @@ async function getProduct(productId) {
     )
 
     if (response.status == 200) {
+
         response_json = await response.json()
+        console.log(response_json)
         return response_json
     } else {
         alert(response.status)
@@ -74,7 +97,7 @@ async function getProduct(productId) {
 
 // 수정 페이지로 가기
 function product_update_page(productId) {
-    window.location.href = `${front_base_url}/templates/product-update.html?id_product=${productId}`;
+    window.location.href = `${frontend_base_url}/templates/product-update.html?id_product=${productId}`;
 }
 
 
@@ -104,7 +127,7 @@ async function product_update(productId) {
     })
     const response_json = await response.json()
     if (response.status == 200) {
-        window.location.replace(`${front_base_url}/templates/product-detail.html?id_product=${productId}`)
+        window.location.replace(`${frontend_base_url}/templates/product-detail.html?id_product=${productId}`)
     } else {
         alert(response_json)
     }
@@ -130,7 +153,7 @@ async function deleteProduct(productId) {
 
     if (response.ok) {
         alert("삭제되었습니다!");
-        window.location.replace(`${front_base_url}/index.html`);
+        window.location.replace(`${frontend_base_url}/index.html`);
     } else {
         const response_json = await response.json();
         alert(`오류가 발생했습니다: ${response_json}`);
@@ -148,4 +171,5 @@ async function getReviews(productId) {
     } else {
         alert(response.status)
     }
+    console.log("response1", response)
 }

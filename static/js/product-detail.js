@@ -3,35 +3,42 @@ console.log("디테일연결")
 
 async function loadReviews(productId) {
     const response = await getReviews(productId);
-    console.log("response=", response)
-
-    console.log("title", response.results[0].title)
-
     const reviewList = document.getElementById("review-list")
 
     response.results.forEach((review, index) => {
-        // const reviewTitle = document.querySelectorAll(".review-title")[index]
-        // const reviewStar = document.querySelectorAll(".review-star")[index]
-        // const reviewWriter = document.querySelectorAll(".review-writer")[index]
-        // const reviewDate = document.querySelectorAll(".review-date")[index]
 
-        // reviewTitle.innerText = review.title
-        // reviewStar.innerText = review.star_rating
-        // reviewWriter.innerText = review.writer
-        // reviewDate.innerText = review.created_at
         console.log("reviewList", reviewList)
+
+        const rating = response.results[index].rating; // 별점 개수
+        const stars = '<div class="star-rating">' + '★'.repeat(rating) + '☆'.repeat(5 - rating) + '</div>'; // 별 모양을 나타내는 문자열 생성
+
         reviewList.innerHTML += `
-            <tr>
-                <td class="tit">
-                    <a href="#" class="review-title">${response.results[index].title}</a>
-                </td>
-                <td class="review-star">${response.results[index].star}</td>
-                <td class="review-writer">${response.results[index].writer}</td>
-                <td class="review-date">${response.results[index].created_at}</td>
-            </tr>
+        <div class="review-box" >
+            <div class="second-area" >
+            <div>
+                <div class="reviews-title">
+                    <div style="margin : 0 40px;">
+                        ${response.results[index].title}
+                        <span class="stars">(${stars})</span>  <!-- 별점 출력 -->
+                    </div>
+                    <div style="margin : 0 40px;">
+                        <span>작성자 : ${response.results[index].writer}</span>
+                    </div>
+                </div>
+                <div class="review-content">
+                    ${response.results[index].content}
+                </div>
+                <div style="color: darkgray; text-align: end;">
+                    ${response.results[index].created_at}
+                </div>
+            </div>
+            </div>
+        </div>
         `
+
     })
 }
+
 
 
 async function loadProducts(productId) {
@@ -82,4 +89,5 @@ window.onload = async function () {
     const productId = urlParmas.get('id_product');
     await loadProducts(productId);
     await loadReviews(productId);
+    await getProduct(productId)
 }

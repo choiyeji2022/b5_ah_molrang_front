@@ -1,39 +1,14 @@
 console.log("리뷰 연결")
 
-async function loadReviews(productId) {
-    const response = await getReviews(productId);
-    console.log("response=", response)
+// 리뷰 작성 페이지 불러오기
+// window.onload = async function () {
+//     const urlParams = new URLSearchParams(window.location.search);
+//     productId = urlParams.get('id_product');
+//     const response = await postReview(productId)
 
-    console.log("title", response.results[0].title)
+//     const reviewPostButton = document.getElementById("review-post");
+//     reviewPostButton.setAttribute("onclick", `postReview(${productId})`);
 
-    const reviewList = document.getElementById("review-list")
-
-    response.results.forEach((review, index) => {
-        // const reviewTitle = document.querySelectorAll(".review-title")[index]
-        // const reviewStar = document.querySelectorAll(".review-star")[index]
-        // const reviewWriter = document.querySelectorAll(".review-writer")[index]
-        // const reviewDate = document.querySelectorAll(".review-date")[index]
-
-        // reviewTitle.innerText = review.title
-        // reviewStar.innerText = review.star_rating
-        // reviewWriter.innerText = review.writer
-        // reviewDate.innerText = review.created_at
-        console.log("reviewList", reviewList)
-        reviewList.innerHTML += `
-            <tr>
-                <td class="tit">
-                    <a href="#" class="review-title">${response.results[index].title}</a>
-                </td>
-                <td class="review-star">${response.results[index].star}</td>
-                <td class="review-writer">${response.results[index].writer}</td>
-                <td class="review-date">${response.results[index].created_at}</td>
-            </tr>
-        `
-    })
-}
-
-window.onload = async function () {
-    const urlParmas = new URLSearchParams(window.location.search);
-    const productId = urlParmas.get('id_product');
-    await loadReviews(productId);
-}
+//     const reviewCancelButton = document.getElementById("review-cancel");
+//     reviewCancelButton.setAttribute("onclick", `reviewCancel(${productId})`);
+// }

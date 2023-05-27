@@ -55,3 +55,45 @@
     border-radius: 20px;
     margin-left: 50px;
 }
+
+.second-area {
+    background-color: rgba(239, 194, 194, 0.5);
+    padding: 30px;
+    border-radius: 20px;
+    margin-left: 50px;
+    margin: 20px;
+}
+
+.second-title {
+    font-size: 2rem;
+    color: #934747;
+    width: 100%;
+    border-bottom: 2px solid #b36f6f;
+    margin: 20px;
+}
+
+.reviews-title {
+    border-bottom: 2px solid #b36f6f;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.star-rating {
+    display: inline-block;
+    font-size: 20px;
+}
+
+.stars {
+    display: inline-block;
+    margin: 0 10px;
+    color: #934747;
+}
+
+.review-content {
+    background: #ffff;
+    border: 5px double #934747;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+}
