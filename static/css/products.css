@@ -97,3 +97,12 @@
     padding: 10px;
     margin: 10px;
 }
+
+.gray-font {
+    color: darkgray;
+    text-align: end;
+}
+
+.gray-btn {
+    color: darkgray;
+}

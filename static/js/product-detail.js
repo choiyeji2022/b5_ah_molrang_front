@@ -1,13 +1,14 @@
 console.log("디테일연결")
 
-
+// 리뷰들 불러오기
 async function loadReviews(productId) {
+    params = new URLSearchParams(window.location.search);
+    reviewId = params.get("id_review") * 1;
     const response = await getReviews(productId);
     const reviewList = document.getElementById("review-list")
 
-    response.results.forEach((review, index) => {
 
-        console.log("reviewList", reviewList)
+    response.results.forEach((review, index) => {
 
         const rating = response.results[index].rating; // 별점 개수
         const stars = '<div class="star-rating">' + '★'.repeat(rating) + '☆'.repeat(5 - rating) + '</div>'; // 별 모양을 나타내는 문자열 생성
@@ -28,8 +29,12 @@ async function loadReviews(productId) {
                 <div class="review-content">
                     ${response.results[index].content}
                 </div>
-                <div style="color: darkgray; text-align: end;">
+                <div class="gray-font">
                     ${response.results[index].created_at}
+                </div>
+                <div text-align: end;>
+                    <button type="button" class="btn gray-btn" onclick="updateReviewPage(${productId},${reviewId})">수정</button>
+                    <button type="button" class="btn gray-btn" onclick="deleteReview(${productId},${reviewId})">삭제</button>
                 </div>
             </div>
             </div>
@@ -40,7 +45,7 @@ async function loadReviews(productId) {
 }
 
 
-
+// 상품들 불러오기
 async function loadProducts(productId) {
     const response = await getProduct(productId);
 
@@ -50,11 +55,20 @@ async function loadProducts(productId) {
     const productQuantity = document.getElementById("product-status")
     const productContent = document.getElementById("product-content")
 
-    const newImage = document.createElement("img")
-    newImage.setAttribute("src", `${backend_base_url}${response.image}`)
-    newImage.setAttribute("class", "img-fluid")
 
-    productImage.appendChild(newImage)
+    if (response.image) {
+        const image = document.createElement("img")
+        image.setAttribute("src", `${backend_base_url}${response.image}`)
+        image.setAttribute("class", "img-fluid")
+        productImage.appendChild(image)
+    } else {
+        // 이미지가 없을 경우 기본 이미지 출력
+        const defaultImage = document.createElement("img")
+        defaultImage.setAttribute("src", "/static/img/baseimage.png")
+        defaultImage.setAttribute("class", "img-fluid")
+        productImage.appendChild(defaultImage)
+    }
+
     productName.innerText = response.product
     productPrice.innerText = `₩${response.price}`
     productQuantity.innerText = response.inventory_status

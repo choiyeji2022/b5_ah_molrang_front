@@ -1,13 +1,13 @@
+// 리뷰 작성하기
 async function reviewCreate() {
     params = new URLSearchParams(window.location.search);
     id_product = params.get("id_product") * 1;
 
     let token = localStorage.getItem("access")
-    console.log(typeof (id_product))
 
     const reviewTitle = document.getElementById("review-title").value
     const reviewContent = document.getElementById("review-content").value
-    const reviewRating = document.querySelector('input[name="rating"]:checked')  // 선택된 별점 값 가져오기
+    const reviewRating = document.querySelector('input[name="rating"]:checked')  // 선택된 별점 값 가져오기 querySelector로 넣어줘야 합니다.
 
     const form = new FormData();
 
@@ -35,4 +35,12 @@ async function reviewCreate() {
     } else {
         alert(response_json)
     }
+}
+
+// 리뷰 작성 취소하기
+function reviewCancel() {
+    params = new URLSearchParams(window.location.search);
+    id_product = params.get("id_product") * 1;
+
+    window.location.href = `${frontend_base_url}/templates/product-detail.html?id_product=${id_product}`;
 }

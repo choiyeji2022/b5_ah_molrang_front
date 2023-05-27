@@ -1,4 +1,3 @@
-console.log("연결")
 
 // API 호출을 위한 기본 URL 설정
 const baseURL = 'http://127.0.0.1:8000/';
@@ -40,7 +39,6 @@ async function addToCart(productname, event) {
 window.onload = async function localProducts() {
     try {
         const products = await getProducts();
-        console.log(products);
 
         const product_list = document.getElementById("product-list");
 
@@ -104,9 +102,9 @@ window.onload = async function localProducts() {
                 product_list.appendChild(newCol);
             });
         } else {
-            console.log("product-list 요소를 찾을 수 없습니다.");
+            alert("product-list 요소를 찾을 수 없습니다.")
         }
     } catch (error) {
-        console.error("상품 목록을 가져오는 중 오류가 발생했습니다:", error);
+        alert("상품 목록을 가져오는 중 오류가 발생했습니다:", error)
     }
 };

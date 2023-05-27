@@ -4,7 +4,6 @@
 // 게시글 불러오기
 async function getProducts() {
     const response = await fetch(`${backend_base_url}/products/`)
-    console.log(response.status)
 
     if (response.status == 200) {
         const response_json = await response.json()
@@ -14,27 +13,9 @@ async function getProducts() {
     }
 }
 
-// function test() {
-//     const test = new FormData();
-//     test.append('1', 1);
-//     console.log(test)
-// }
-// test()
 
 // 게시글 생성
 async function postProduct() {
-    // const title = document.getElementById("title").value;
-    // const star = parseInt(document.getElementById("star").value);
-    // const content = document.getElementById("content").value;
-    // const image = document.getElementById("image");
-
-    // const formData = new FormData();
-    // formData.append("title", title,);
-    // formData.append("star", star);
-    // formData.append("content", content);
-    // formData.append("image", image.files[0]);
-    // console.log('hi')
-
     const product = document.getElementById("formGroupExampleInput").value
     const price = parseInt(document.getElementById("price_1").value)
     const total_quantity = document.getElementById("total").value
@@ -87,7 +68,6 @@ async function getProduct(productId) {
     if (response.status == 200) {
 
         response_json = await response.json()
-        console.log(response_json)
         return response_json
     } else {
         alert(response.status)
@@ -171,5 +151,4 @@ async function getReviews(productId) {
     } else {
         alert(response.status)
     }
-    console.log("response1", response)
 }
