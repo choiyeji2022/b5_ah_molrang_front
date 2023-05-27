@@ -1,5 +1,5 @@
 const backend_base_url = "http://127.0.0.1:8000";
-const front_base_url = "http://127.0.0.1:5500";
+const frontend_base_url = "http://127.0.0.1:5500";
 
 async function injectNavbar() {
     fetch("../navbar.html").then(response => {
@@ -68,7 +68,6 @@ async function injectNavbar() {
 }
 
 console.log("로딩되었습니다.")
-
 
 
 function handleLogout() {
