@@ -10,6 +10,7 @@ console.log(payload_parse)
 // 사용자의 ID 값을 추출하여 변수에 할당
 const user_id = user
 
+// 어드민 유저일 경우와 일반 유저일 경우 화면 구성 다르게(어드민 유저는 product list, wish list, review list / 일반 유저는 wish list, review list)
 if (payload) {
     console.log("is_admin", payload_parse.is_admin)
 
@@ -30,7 +31,7 @@ if (payload) {
     }
 }
 
-
+// 백엔드에서 product_set(본인이 작성한 product)를 불러오고 제품을 그리드로 붙여주는 함수
 async function getProducts() {
     const response = await fetch(`${backend_base_url}/users/${user_id}/product/`, {
         headers: {
@@ -73,6 +74,7 @@ async function getProducts() {
 
 }
 
+// 백엔드에서 wishes(본인이 찜한 wish list)를 불러오고 제품을 그리드로 붙여주는 함수
 async function getWishes() {
     const response = await fetch(`${backend_base_url}/users/${user_id}/wish/`, {
         headers: {
@@ -114,6 +116,7 @@ async function getWishes() {
 
 }
 
+// 백엔드에서 review_set(본인이 작성한 review list)를 불러오고 제품을 그리드로 붙여주는 함수
 async function getReviews() {
     const response = await fetch(`${backend_base_url}/users/${user_id}/review/`, {
         headers: {
