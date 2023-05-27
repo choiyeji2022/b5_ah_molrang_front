@@ -24,8 +24,8 @@ async function injectNavbar() {
     const payload = localStorage.getItem("payload")
     const payload_parse = JSON.parse(payload)
 
+
     if (payload) {
-        console.log("is_admin", payload_parse.is_admin)
 
         // 어드민일 경우 글작성 버튼 보이게 하기
         if (payload_parse.is_admin) {
@@ -38,8 +38,7 @@ async function injectNavbar() {
         nav_left3.style.display = "block"
         nav_left4.style.display = "block"
 
-        // const payload = localStorage.getItem("payload")
-        // const payload_parse = JSON.parse(payload)
+
         console.log(payload_parse.username)
 
         const intro = document.getElementById("intro")
