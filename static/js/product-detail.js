@@ -105,3 +105,51 @@ window.onload = async function () {
     await loadReviews(productId);
     await getProduct(productId)
 }
+
+async function addWish() {
+    const urlParmas = new URLSearchParams(window.location.search);
+    product_Id = urlParmas.get('id_product');
+
+    const access_token = localStorage.getItem("access");
+    console.log(access_token)
+
+    const response = await fetch(`${backend_base_url}/products/${product_Id}/wish/`, {
+        headers: {
+            "Authorization": "Bearer " + access_token
+        },
+        method: "POST"
+    })
+    console.log(response)
+
+    if (response.status == 200) {
+        const response_json = await response.json()
+        console.log(response_json)
+    } else {
+        alert("찜 추가에 실패했습니다")
+    }
+
+}
+
+async function addWish() {
+    const urlParmas = new URLSearchParams(window.location.search);
+    product_Id = urlParmas.get('id_product');
+
+    const access_token = localStorage.getItem("access");
+    console.log(access_token)
+
+    const response = await fetch(`${backend_base_url}/products/${product_Id}/wish/`, {
+        headers: {
+            "Authorization": "Bearer " + access_token
+        },
+        method: "POST"
+    })
+    console.log(response)
+
+    if (response.status == 200) {
+        const response_json = await response.json()
+        console.log(response_json)
+    } else {
+        alert("찜 추가에 실패했습니다")
+    }
+
+}
