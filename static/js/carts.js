@@ -1,14 +1,20 @@
-// API 호출을 위한 기본 URL 설정
-const baseURL = 'http://127.0.0.1:8000/';
+// Access Token 값 불러오기
+const access_token = localStorage.getItem("access");
 
-// 토큰을 로컬 스토리지에서 가져옵니다.
-const token = localStorage.getItem('token');
+// payload 값 가져오기 -> name, user_id 가능!
+const payload = localStorage.getItem('payload');
+const payload_parse = JSON.parse(payload);
+const user = JSON.parse(payload)['user_id'];
+console.log(payload_parse);
 
-// Axios 인스턴스 생성
+// 사용자의 ID 값을 추출하여 변수에 할당
+const user_id = user;
+
+// API 객체 생성
 const api = axios.create({
-    baseURL: baseURL,
+    baseURL: 'http://127.0.0.1:8000',
     headers: {
-        'Authorization': `Bearer ${token}`
+        'Authorization': `Bearer ${access_token}`
     }
 });
 
@@ -41,7 +47,7 @@ function calculateTotalAmount() {
 async function getCartItems() {
     try {
         // 장바구니 목록 API 호출
-        const response = await api.get('carts/');
+        const response = await api.get('/carts/');
         const cartItems = response.data;
 
         // 장바구니 목록을 화면에 표시
