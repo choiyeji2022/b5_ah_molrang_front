@@ -24,11 +24,9 @@ const deleteUser = () => {
     api.delete(`/users/`)
         .then(response => {
             console.log(response.data.message);  // 회원 탈퇴 완료 메시지 출력
-            // 여기서 추가적인 동작을 수행할 수 있습니다.
         })
         .catch(error => {
             console.error(error);
-            // 에러 처리 로직을 추가할 수 있습니다.
         });
 };
 
