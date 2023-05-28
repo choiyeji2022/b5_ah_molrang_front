@@ -160,4 +160,3 @@ async function removeCartItem(cartItemId) {
 // 페이지 로드 시 장바구니 목록을 가져옵니다.
 window.addEventListener('load', getCartItems);
 
-
