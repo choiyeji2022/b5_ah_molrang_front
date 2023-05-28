@@ -102,14 +102,14 @@ window.onload = async function localProducts() {
     }
 };
 
-
+// 등록된 상품을 장바구니에 추가하는 함수
 async function addToCart(product) {
     console.log('product_id:', product);
     event.preventDefault()
 
     try {
         const response = await api.post('/carts/', {
-            product: product, // 상품의 아이디 필드명을 product_id로 수정
+            product: product,
             quantity: 1,
         });
         console.log(response)
