@@ -1,6 +1,6 @@
-
 // Access Token 값 불러오기
 const access_token = localStorage.getItem("access");
+console.log(access_token)
 
 // payload 값 가져오기 -> name, user_id 가능!
 const payload = localStorage.getItem('payload');
@@ -98,6 +98,8 @@ window.onload = async function localProducts() {
         alert("상품 목록을 가져오는 중 오류가 발생했습니다:", error)
     }
 };
+
+
 
 // 등록된 상품을 장바구니에 추가하는 함수
 async function addToCart(product) {
