@@ -15,7 +15,7 @@ async function injectNavbar() {
     document.querySelector("header").innerHTML = data;
 
     // 로그인 전 상품 등록 네브바에서 숨겨짐
-    let nav_left1 = document.getElementById("nav-left1") 
+    let nav_left1 = document.getElementById("nav-left1")
     nav_left1.style.display = "none"
     // 로그인 전 회원정보 수정 네브바에서 숨겨짐
     let nav_left2 = document.getElementById("nav-left2")
@@ -28,16 +28,23 @@ async function injectNavbar() {
     nav_left4.style.display = "none"
 
     const payload = localStorage.getItem("payload")
+    const payload_parse = JSON.parse(payload)
+
+
     if (payload) {
-        // 로그인 후 위에서 숨긴 상품등록, 회원정보 수정, 회원 탈퇴, 마이페이지 보여짐
-        nav_left1.style.display = "block"
+
+        // 어드민일 경우 글작성 버튼 보이게 하기
+        if (payload_parse.is_admin) {
+            nav_left1.style.display = "block"
+        } else {
+            nav_left1.style.display = "none"
+        }
+
         nav_left2.style.display = "block"
         nav_left3.style.display = "block"
         nav_left4.style.display = "block"
-        
+
         // 로그인 후 회원정보에서 유저네임 불러와서 네브바에서 보여주기
-        const payload = localStorage.getItem("payload")
-        const payload_parse = JSON.parse(payload)
         console.log(payload_parse.username)
 
         const intro = document.getElementById("intro")
@@ -69,33 +76,7 @@ async function injectNavbar() {
     }
 }
 
-// console.log("로딩되었습니다.")
-
-// function lalala() {
-//     const payload = localStorage.getItem("payload")
-//     const payload_parse = JSON.parse(payload)
-//     console.log(payload_parse.username)
-
-//     const intro = document.getElementById("intro")
-
-//     intro.innerText = `${payload_parse.username} 님 안녕하세요!`
-
-
-//     let navbarRight = document.getElementById("nav-right")
-//     let newLi = document.createElement("li")
-//     newLi.setAttribute("class", 'nav-link active')
-
-//     newLi.innerText = "로그아웃"
-//     newLi.setAttribute("onClick", "handleLogout()")
-
-//     console.log("navbarRight=", navbarRight)
-
-//     navbarRight.appendChild(newLi)
-
-//     let loginButton = document.getElementById("login-button")
-//     loginButton.style.display = "none"
-// }
-
+console.log("로딩되었습니다.")
 
 // 로그아웃 함수
 function handleLogout() {
@@ -103,7 +84,6 @@ function handleLogout() {
     localStorage.removeItem("refresh")
     localStorage.removeItem("payload")
     location.replace(`${frontend_base_url}/index.html`)
-
     console.log(response)
 }
 
@@ -117,16 +97,6 @@ function checkLogin() {
 }
 
 
-
-
-
-// async function loadScreen() {
-//     await injectNavbar()
-
-//     lalala()
-
-// }
-// loadScreen()
 
 // 네비게이션 바 실행시켜주는 함수
 injectNavbar()
