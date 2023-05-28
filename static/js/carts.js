@@ -47,16 +47,16 @@ function calculateTotalAmount() {
 async function getCartItems() {
     try {
         // 장바구니 목록 API 호출
-        const response = await api.get('/carts/');
+        const response = await api.get("/carts/");
         const cartItems = response.data;
 
         // 장바구니 목록을 화면에 표시
-        const cartContainer = document.querySelector('.cart-items');
-        cartContainer.innerHTML = ''; // 기존 내용 초기화
+        const cartContainer = document.querySelector(".cart-items");
+        cartContainer.innerHTML = ""; // 기존 내용 초기화
 
-        cartItems.forEach(cartItem => {
-            const cartItemElement = document.createElement('div');
-            cartItemElement.classList.add('cart-item');
+        cartItems.forEach((cartItem) => {
+            const cartItemElement = document.createElement("div");
+            cartItemElement.classList.add("cart-item");
 
             // 장바구니 아이템의 정보를 표시
             const imageSrc = `${window.location.origin}${cartItem.image}`;
@@ -65,41 +65,44 @@ async function getCartItems() {
         <div class="product-info">
           <img class="product-image" src="${imageSrc}" alt="${cartItem.product.product}" width="200">
           <div class="product-details">
-            <h3>${cartItem.product.product}</h3>
+            <h4>${cartItem.product.product}</h4>
             <p>${cartItem.product.content}</p>
             <p class="price">${cartItem.product.price}원</p>
             <p>${cartItem.product.inventory_status}</p>
             <p>작성자: ${cartItem.product.writer}</p>
           </div>
         </div>
-
+  
         <div class="quantity">
           <span class="qt-minus">-</span>
           <span class="qt">${cartItem.quantity}</span>
           <span class="qt-plus">+</span>
         </div>
-
+  
         <div class="checkbox">
           <input type="checkbox" class="item-checkbox">
         </div>
-
+  
         <div class="remove">
           <button class="remove-btn">제거</button>
-        </div>
+        </div>`;
 
-        <div id="total-price"></div>
-
-      `;
 
             cartContainer.appendChild(cartItemElement);
 
-            // 수량 조절 이벤트 처리
-            const quantityContainer = cartItemElement.querySelector('.quantity');
-            const quantityMinusBtn = quantityContainer.querySelector('.qt-minus');
-            const quantityPlusBtn = quantityContainer.querySelector('.qt-plus');
-            const quantityText = quantityContainer.querySelector('.qt');
+            // 상품 제거 버튼 이벤트 핸들러 추가
+            const removeBtn = cartItemElement.querySelector(".remove-btn");
+            removeBtn.addEventListener("click", () => {
+                removeCartItem(cartItem.id);
+            });
 
-            quantityMinusBtn.addEventListener('click', () => {
+            // 수량 조절 이벤트 처리
+            const quantityContainer = cartItemElement.querySelector(".quantity");
+            const quantityMinusBtn = quantityContainer.querySelector(".qt-minus");
+            const quantityPlusBtn = quantityContainer.querySelector(".qt-plus");
+            const quantityText = quantityContainer.querySelector(".qt");
+
+            quantityMinusBtn.addEventListener("click", () => {
                 if (cartItem.quantity > 1) {
                     cartItem.quantity--;
                     quantityText.textContent = cartItem.quantity;
@@ -107,17 +110,10 @@ async function getCartItems() {
                 }
             });
 
-            quantityPlusBtn.addEventListener('click', () => {
+            quantityPlusBtn.addEventListener("click", () => {
                 cartItem.quantity++;
                 quantityText.textContent = cartItem.quantity;
                 calculateTotalAmount();
-            });
-
-            // 상품 제거 이벤트 처리
-            const removeBtn = cartItemElement.querySelector('.remove-btn');
-            removeBtn.addEventListener('click', () => {
-                const cartItemId = cartItem.id;
-                removeCartItem(cartItemId);
             });
         });
 
