@@ -130,6 +130,7 @@ async function addWish() {
 
 }
 
+// 상세페이지에서 찜 기능: 찜이 되어있으면 찜 취소, 안 되어있으면 찜 -> alert창으로 데이터 알려줌
 async function addWish() {
     const urlParmas = new URLSearchParams(window.location.search);
     product_Id = urlParmas.get('id_product');
