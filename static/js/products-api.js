@@ -1,6 +1,3 @@
-
-
-
 // 게시글 불러오기
 async function getProducts() {
     const response = await fetch(`${backend_base_url}/products/`)
