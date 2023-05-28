@@ -106,29 +106,6 @@ window.onload = async function () {
     await getProduct(productId)
 }
 
-async function addWish() {
-    const urlParmas = new URLSearchParams(window.location.search);
-    product_Id = urlParmas.get('id_product');
-
-    const access_token = localStorage.getItem("access");
-    console.log(access_token)
-
-    const response = await fetch(`${backend_base_url}/products/${product_Id}/wish/`, {
-        headers: {
-            "Authorization": "Bearer " + access_token
-        },
-        method: "POST"
-    })
-    console.log(response)
-
-    if (response.status == 200) {
-        const response_json = await response.json()
-        console.log(response_json)
-    } else {
-        alert("찜 추가에 실패했습니다")
-    }
-
-}
 
 // 상세페이지에서 찜 기능: 찜이 되어있으면 찜 취소, 안 되어있으면 찜 -> alert창으로 데이터 알려줌
 async function addWish() {
@@ -149,6 +126,7 @@ async function addWish() {
     if (response.status == 200) {
         const response_json = await response.json()
         console.log(response_json)
+        alert(response_json)
     } else {
         alert("찜 추가에 실패했습니다")
     }

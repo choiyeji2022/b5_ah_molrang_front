@@ -31,7 +31,7 @@ async function postProduct() {
         console.log(key[0] + ', ' + key[1]);
     }
 
-    let token = localStorage.getItem("token")
+    let token = localStorage.getItem("access")
     const response = await fetch(`${backend_base_url}/products/`, {
         method: "POST",
         headers: {
