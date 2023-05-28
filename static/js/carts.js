@@ -59,7 +59,10 @@ async function getCartItems() {
             cartItemElement.classList.add("cart-item");
 
             // 장바구니 아이템의 정보를 표시
-            const imageSrc = `${window.location.origin}${cartItem.image}`;
+            const imageSrc = cartItem.product.image
+                ? `${backend_base_url}${cartItem.product.image}`
+                : "/static/img/baseimage.png";
+            console.log(cartItem.product);
 
             cartItemElement.innerHTML = `
         <div class="product-info">

@@ -93,7 +93,7 @@ async function product_update(productId) {
     formdata.append("image", image)
     formdata.append("content", content)
 
-    let token = localStorage.getItem("token")
+    let token = localStorage.getItem("access")
 
     const response = await fetch(`${backend_base_url}/products/${productId}/`, {
         method: 'PUT',
@@ -113,7 +113,7 @@ async function product_update(productId) {
 
 // 삭제
 async function deleteProduct(productId) {
-    let token = localStorage.getItem("token")
+    let token = localStorage.getItem("access")
 
     // confirm 메소드를 사용하여 확인 체크창을 띄움
     const confirmed = confirm("정말 삭제하시겠습니까?");
