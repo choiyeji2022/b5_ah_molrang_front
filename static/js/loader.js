@@ -1,5 +1,5 @@
 // 네비게이션 바가 있는 html에서 먼저 실행되면 여기서 base url들을 불러옴
-const backend_base_url = "http://127.0.0.1:8000";
+const backend_base_url = "http://lllalavie.com";
 const frontend_base_url = "http://127.0.0.1:5500";
 
 // 네비게이션 바를 불러오는 함수 로그인 되었을 때와 안 되어 있을 때 보여지는 화면 다름

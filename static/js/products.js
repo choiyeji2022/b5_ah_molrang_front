@@ -13,7 +13,7 @@ const user_id = user;
 
 // API 객체 생성
 const api = axios.create({
-    baseURL: 'http://127.0.0.1:8000',
+    baseURL: 'http://lllalavie.com',
     headers: {
         'Authorization': `Bearer ${access_token}`
     }
@@ -79,7 +79,7 @@ window.onload = async function localProducts() {
                 newCardBody.appendChild(price);
 
                 const addToCartButton = document.createElement("button");
-                addToCartButton.setAttribute("class", "btn btn-primary");
+                addToCartButton.setAttribute("class", "btn btn-dark");
                 addToCartButton.innerText = "장바구니에 추가";
                 addToCartButton.addEventListener("click", (event) => {
                     event.stopPropagation(); // 상위 요소로 이벤트 전파 방지

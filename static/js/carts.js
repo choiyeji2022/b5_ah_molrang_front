@@ -12,7 +12,7 @@ const user_id = user;
 
 // API 객체 생성
 const api = axios.create({
-    baseURL: 'http://127.0.0.1:8000',
+    baseURL: 'http://lllalavie.com',
     headers: {
         'Authorization': `Bearer ${access_token}`
     }

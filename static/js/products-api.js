@@ -104,6 +104,7 @@ async function product_update(productId) {
     })
     const response_json = await response.json()
     if (response.status == 200) {
+        alert("수정 완료!")
         window.location.replace(`${frontend_base_url}/templates/product-detail.html?id_product=${productId}`)
     } else {
         alert(response_json)

@@ -1,7 +1,3 @@
-// 백엔드와 통신 위한 유알엘 설정
-const backend_base_url = "http://127.0.0.1:8000"
-const frontend_base_url = "http://127.0.0.1:5500"
-
 async function signin_button() {
     const loginData = {
         username: document.querySelector("#user_login_id").value,
@@ -34,9 +30,13 @@ async function signin_button() {
         }).join(''));
 
         localStorage.setItem("payload", jsonPayload);
+        const payload = localStorage.getItem("payload")
+        const payload_parse = JSON.parse(payload)
+        alert(`${payload_parse.username}님, 아몰약에 오신 것을 환영합니다!`)
         window.location.replace(`${frontend_base_url}/index.html`);
     } else {
-        alert(response.status)
+        alert("정보가 일치하지 않습니다! 다시 입력해주세요!")
+        window.location.replace(`${frontend_base_url}/templates/signin.html`);
     }
 
 
