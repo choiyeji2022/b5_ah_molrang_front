@@ -1,8 +1,3 @@
-// 백엔드와 통신 위한 유알엘 설정
-const backend_base_url = "http://127.0.0.1:8000"
-const frontend_base_url = "http://127.0.0.1:5500"
-
-
 // 회원정보를 기입받아 백엔드에 보내기 위해 에이싱크 펑션 비동기함수 작성
 async function signup_button() {
     if (document.querySelector("#user_create_password").value == document.querySelector("#user_create_password_check").value) {
