@@ -27,7 +27,7 @@ if (payload) {
             await getWishes()
             await getReviews()
         }
-        
+
     }
 }
 
@@ -51,7 +51,7 @@ async function getProducts() {
             const writer = a['writer']
             console.log(product_id, price, product, total_quantity, writer, image)
 
-            
+
 
             let temp_html2 = `    
                             <div class="col w-75 mx-auto">
@@ -93,7 +93,7 @@ async function getWishes() {
             const w_writer = a['writer']
             console.log(w_image, w_price, w_product, w_writer)
 
-            
+
 
             let temp_html2 = `    
                             <div class="col w-75 mx-auto">
@@ -130,12 +130,12 @@ async function getReviews() {
         console.log(response_json)
         response_json['review_set'].forEach(a => {
             const r_prodcut_id = a['product']
-            const r_title= a['title']
+            const r_title = a['title']
             const r_content = a['content']
             const r_writer = a['writer']
             console.log(r_prodcut_id, r_content, r_title, r_writer)
 
-            
+
 
             let temp_html2 = `    
                             <div class="col w-75 mx-auto">

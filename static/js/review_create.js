@@ -13,9 +13,9 @@ async function reviewCreate() {
 
     form.append("title", reviewTitle)
     form.append("content", reviewContent)
-    form.append("rating", reviewRating['value']); // 별점 값 추가 value의 값을 출력해야함
+    form.append("rating", reviewRating.value); // 별점 값 추가 value의 값을 출력해야함
 
-    const response = await fetch(`http://127.0.0.1:8000/products/${id_product}/reviews/`, {
+    const response = await fetch(`${backend_base_url}/products/${id_product}/reviews/`, {
         headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`
@@ -24,7 +24,7 @@ async function reviewCreate() {
         body: JSON.stringify({
             "title": reviewTitle,
             "content": reviewContent,
-            "rating": reviewRating['value']
+            "rating": reviewRating.value
         })
     });
 

@@ -3,13 +3,13 @@ console.log("디테일연결")
 // 리뷰들 불러오기
 async function loadReviews(productId) {
     params = new URLSearchParams(window.location.search);
-    reviewId = params.get("id_review") * 1;
+    // reviewId = params.get("id_review") * 1;
     const response = await getReviews(productId);
     const reviewList = document.getElementById("review-list")
 
 
     response.results.forEach((review, index) => {
-
+        const reviewId = response.results[index].id
         const rating = response.results[index].rating; // 별점 개수
         const stars = '<div class="star-rating">' + '★'.repeat(rating) + '☆'.repeat(5 - rating) + '</div>'; // 별 모양을 나타내는 문자열 생성
 

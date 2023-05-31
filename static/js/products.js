@@ -5,11 +5,15 @@ console.log(access_token)
 // payload 값 가져오기 -> name, user_id 가능!
 const payload = localStorage.getItem('payload');
 const payload_parse = JSON.parse(payload);
-const user = JSON.parse(payload)['user_id'];
-console.log(payload_parse);
 
-// 사용자의 ID 값을 추출하여 변수에 할당
-const user_id = user;
+// 로그인이 안되어 있을 때 user_id 에러 발생에서 if문 넣어주었습니다!
+if (payload) {
+    // 사용자의 ID 값을 추출하여 변수에 할당
+    const user = JSON.parse(payload)['user_id'];
+    const user_id = user;
+}
+
+console.log(payload_parse);
 
 // API 객체 생성
 const api = axios.create({
@@ -77,15 +81,24 @@ window.onload = async function localProducts() {
                 newCardBody.appendChild(productName);
                 newCardBody.appendChild(inventoryStatus);
                 newCardBody.appendChild(price);
+                console.log(payload_parse)
+
 
                 const addToCartButton = document.createElement("button");
-                addToCartButton.setAttribute("class", "btn btn-primary");
-                addToCartButton.innerText = "장바구니에 추가";
-                addToCartButton.addEventListener("click", (event) => {
-                    event.stopPropagation(); // 상위 요소로 이벤트 전파 방지
-                    event.preventDefault(); // 기본 동작인 폼 제출 방지
-                    addToCart(product.id);
-                });
+                addToCartButton.style.display = "none"
+
+                // 로그인한 사용자만 장바구니 볼 수 있게
+                if (payload) {
+
+                    addToCartButton.style.display = "block"
+                    addToCartButton.setAttribute("class", "btn btn-dark");
+                    addToCartButton.innerText = "장바구니에 추가";
+                    addToCartButton.addEventListener("click", (event) => {
+                        event.stopPropagation(); // 상위 요소로 이벤트 전파 방지
+                        event.preventDefault(); // 기본 동작인 폼 제출 방지
+                        addToCart(product.id);
+                    });
+                }
 
                 newCardBody.appendChild(addToCartButton);
                 newCard.appendChild(newCardBody);
