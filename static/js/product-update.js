@@ -1,7 +1,7 @@
 console.log('수정')
 window.onload = async function () {
     const urlParams = new URLSearchParams(window.location.search);
-    productId = urlParams.get('id_product');
+    const productId = urlParams.get('id_product');
     const response = await getProduct(productId);  // 상세페이지 불러오는 함수를 담아줌
 
 

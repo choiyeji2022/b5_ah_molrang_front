@@ -30,9 +30,13 @@ async function signin_button() {
         }).join(''));
 
         localStorage.setItem("payload", jsonPayload);
+        const payload = localStorage.getItem("payload")
+        const payload_parse = JSON.parse(payload)
+        alert(`${payload_parse.username}님, 아몰약에 오신 것을 환영합니다!`)
         window.location.replace(`${frontend_base_url}/index.html`);
     } else {
-        alert(response.status)
+        alert("정보가 일치하지 않습니다! 다시 입력해주세요!")
+        window.location.replace(`${frontend_base_url}/templates/signin.html`);
     }
 
 
